@@ -5,7 +5,7 @@ class Mover {
         this.vel.mult(5);
         this.acc = createVector(0, 0);
         this.mass = mass;
-        this.r = sqrt(this.mass) * 2;
+        this.r = 10;
     }
 
     applyForce(force) {
@@ -22,6 +22,6 @@ class Mover {
     show() {
         fill(200);
         stroke(0);
-        ellipse(this.pos.x, this.pos.y, this.mass, this.mass);
+        ellipse(this.pos.x, this.pos.y, this.r, this.r);
     }
 }

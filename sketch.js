@@ -2,93 +2,49 @@ let movers = [];
 let attractor;
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
-    background(0);
-    for (let i = 0; i < 20; i++) {
-        let x = random(width);
-        let y = random(height);
+  createCanvas(windowWidth, windowHeight);
+  background(0);
 
-        //TODO: Mass Slider
-        let m = 10
+  // Initialize movers with mass from the first slider
+  for (let i = 0; i < 20; i++) {
+      let x = random(width);
+      let y = random(height);
+      let mass1 = document.getElementById('mass1').value; // Get mass from mass1 slider
+      movers[i] = new Mover(x, y, mass1);
+  }
 
-        movers[i] = new Mover(x, y, m);
-    }
-    attractor = new Attractor(width/2, height/2, 10);
+  // Initialize attractor with a default mass
+  let mass2 = document.getElementById('mass2').value; // Get mass from mass2 slider
+  attractor = new Attractor(width / 2, height / 2, mass2);
+
+  // Add event listeners for the sliders to update the attractor mass and display values
+  const mass1Slider = document.getElementById('mass1');
+  const mass2Slider = document.getElementById('mass2');
+  
+  mass1Slider.addEventListener('input', function() {
+      document.getElementById('mass1Value').innerText = this.value; // Update displayed mass1 value
+      // Update movers' mass if desired
+      for (let mover of movers) {
+          mover.mass = this.value; // Update mass for each mover if needed
+      }
+  });
+
+  mass2Slider.addEventListener('input', function() {
+      attractor.mass = this.value; // Update attractor mass dynamically
+      attractor.r = sqrt(attractor.mass) * 10; // Update radius based on new mass
+      document.getElementById('mass2Value').innerText = this.value; // Update displayed mass2 value
+  });
 }
 
+
 function draw() {
-    background(0, 25); //length of trail
+    background(0, 25); // Length of trail
 
     for (let mover of movers) {
-        mover.update(); 
+        mover.update();
         attractor.attract(mover);
         mover.show();
     }
 
     attractor.show();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*let movers = [];
-let attractors = [];
-
-function setup() {
-    createCanvas(windowWidth, windowHeight);
-    for (let i = 0; i < 10; i++) {
-        let x = random(width);
-        let y = random(height);
-        let m = 50;
-        movers[i] = new Mover(x, y, m);
-    }
-    let a = new Attractor(300, 300, 100, 5);
-    attractors.push(a);
-    background(0);
-}
-
-function mousePressed() {
-  let a = new Attractor(mouseX, mouseY, 5);
-  attractors.push(a);
-}
-
-function keyPressed() {
-  let a = new Attractor(mouseX, mouseY, -5);
-  attractors.push(a);
-}
-
-function draw() {
-  background(0);
-  for (let mover of movers) {
-    mover.update();
-    mover.show();
-    for (let attractor of attractors) {
-      attractor.attract(mover);
-    }
-  }
-  for (let attractor of attractors) {
-    attractor.show();
-  }
-}
-
-// Resize the canvas when the window is resized
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}*/
