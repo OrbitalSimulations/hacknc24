@@ -1,8 +1,9 @@
 // Module aliases
-const { Engine, Render, Runner, Bodies, Composite, Body } = Matter;
+const { Engine, Render, Runner, Bodies, Composite, Body, Mouse, MouseConstraint, Events } = Matter;
 
 // Create an engine
 const engine = Engine.create();
+engine.world.gravity.y = 0;  // Disable default gravity
 
 // Create a renderer
 const render = Render.create({
@@ -27,29 +28,36 @@ const centralBody = Bodies.circle(window.innerWidth / 2, window.innerHeight / 2,
     isStatic: true,
     render: {
         fillStyle: 'yellow'
-    }
+    },
+    mass: 1.98 * 10 ** 30 // Mass of the Sun
 });
+
+// Define a scale factor (1 AU = 100 pixels)
+const scaleFactor = 100; // Scale: 1 AU to pixels
 
 // Create orbiting bodies (e.g., planets)
 const orbitingBodies = [];
-for (let i = 0; i < 5; i++) {
-    const orbitingBody = Bodies.circle(window.innerWidth / 2 + (i + 1) * 100, window.innerHeight / 2, 20, {
+
+const gravitationalConstant = 6.67430 * 10 ** (-11); // m^3 kg^-1 s^-2
+const massEarth = 5.972 * 10 ** 24; // Mass of the Earth in kg
+
+// Define distances in AU (e.g., distances of planets from the Sun)
+const distancesAU = [1, 1.524, 5.204, 9.581, 19.181]; // Distances of Mercury, Venus, Jupiter, Saturn, Uranus in AU
+
+for (let i = 0; i < distancesAU.length; i++) {
+    const distanceInPixels = distancesAU[i] * scaleFactor; // Scale distance to pixels
+    const orbitingBody = Bodies.circle(window.innerWidth / 2 + distanceInPixels, window.innerHeight / 2, 20, {
         render: {
             fillStyle: 'blue'
         }
     });
     
-    // Calculate initial tangential velocity for stable orbit
-    const distance = Math.sqrt(Math.pow(orbitingBody.position.x - centralBody.position.x, 2) +
-                               Math.pow(orbitingBody.position.y - centralBody.position.y, 2));
-    const velocityMagnitude = Math.sqrt(0.001 * centralBody.mass / distance);
-    
-    // Perpendicular velocity (90 degrees to the gravitational force direction)
-    const angle = Math.atan2(orbitingBody.position.y - centralBody.position.y, orbitingBody.position.x - centralBody.position.x);
-    Body.setVelocity(orbitingBody, {
-        x: -velocityMagnitude * Math.cos(angle),
-        y: velocityMagnitude * Math.sin(angle)
-    });
+    // Calculate initial tangential velocity for a circular orbit using gravitational constant
+    const distanceInMeters = distancesAU[i] * 1.496 * 10 ** 11; // Convert AU to meters
+    const initialVelocity = Math.sqrt(gravitationalConstant * centralBody.mass / distanceInMeters); // Using meters for calculations
+    console.log(initialVelocity);
+
+    Body.setVelocity(orbitingBody, { x: 0, y: initialVelocity });
 
     orbitingBodies.push(orbitingBody);
 }
@@ -58,16 +66,24 @@ for (let i = 0; i < 5; i++) {
 Composite.add(engine.world, [centralBody, ...orbitingBodies]);
 
 // Apply gravitational forces to simulate orbiting
-Matter.Events.on(engine, 'beforeUpdate', function() {
+Events.on(engine, 'beforeUpdate', function() {
     orbitingBodies.forEach(body => {
-        const dist = Math.sqrt(Math.pow(body.position.x - centralBody.position.x, 2) + Math.pow(body.position.y - centralBody.position.y, 2));
-        const forceMagnitude = 0.001 * body.mass / (dist * dist); // Adjust force based on distance for stability
-        const angle = Math.atan2(body.position.y - centralBody.position.y, body.position.x - centralBody.position.x);
+        const dx = body.position.x - centralBody.position.x;
+        const dy = body.position.y - centralBody.position.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
         
-        Body.applyForce(body, body.position, {
-            x: -forceMagnitude * Math.cos(angle),
-            y: -forceMagnitude * Math.sin(angle)
-        });
+        // Calculate gravitational force magnitude
+        const forceMagnitude = gravitationalConstant * centralBody.mass * massEarth / ((dist * (1.496 * 10 ** 11 / scaleFactor)) ** 2); // Convert distance to meters for calculations
+        
+        // Check if distance is not zero to avoid division by zero
+        if (dist > 0) {
+            // Calculate the force vector based on the angle
+            const angle = Math.atan2(dy, dx);
+            Body.applyForce(body, body.position, {
+                x: -forceMagnitude * Math.cos(angle),
+                y: -forceMagnitude * Math.sin(angle)
+            });
+        }
     });
 });
 
