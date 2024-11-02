@@ -9,9 +9,17 @@ const scrollShow = () => {
         $(tag).removeClass("visible");
       }
     }
-  }
-  
-  $(document).on("DOMContentLoaded", () => {
+};
+
+$(document).on("DOMContentLoaded", () => {
     $(document).on("scroll", scrollShow);
     scrollShow();
-  })
+});
+
+function openLegend() {
+    document.getElementById("legendMenu").style.width = "250px";
+}
+
+function closeLegend() {
+    document.getElementById("legendMenu").style.width = "0";
+}

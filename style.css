@@ -354,3 +354,15 @@ mark {
     margin-right: auto;
   }
 }
+
+.slider {
+    display: flex; /* Use flexbox for each slider */
+    flex-direction: row; /* Stack label and input vertically */
+    margin: 0px 10px; /* Space between sliders */
+    width: 100%; /* Make the slider take full width */
+}
+
+.slider1 {
+    display: flex; /* Use flexbox for each slider */
+    width: 40%; /* Make the slider take full width */
+}
