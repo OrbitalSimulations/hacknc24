@@ -55,7 +55,7 @@ body {
   left: -5vw;
   top: -5vh;
   z-index: -1;
-  background-image: url('images/Stock photo.jpg'); /* Add this */
+  background-image: url('images/background.jpg'); /* Add this */
   background-size: cover; /* Ensures the image covers the full area */
   background-position: center; /* Centers the image */
 }
