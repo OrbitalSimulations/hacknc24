@@ -5,7 +5,7 @@ class Mover {
         this.vel.mult(5);
         this.acc = createVector(0, 0);
         this.mass = mass;
-        this.r = 10;
+        this.r = sqrt(this.mass) * 2;
     }
 
     applyForce(force) {
@@ -20,8 +20,13 @@ class Mover {
     }
 
     show() {
-        fill(200);
-        stroke(0);
-        ellipse(this.pos.x, this.pos.y, this.r, this.r);
+        // Draw the glow effect
+        noStroke();
+        fill(4, 217, 255, 15); // Slightly translucent glow color
+        ellipse(this.pos.x, this.pos.y, this.r * 3); // Larger ellipse for glow
+
+        // Draw the main mover
+        fill("#04D9FF");
+        ellipse(this.pos.x, this.pos.y, this.mass, this.mass);
     }
 }

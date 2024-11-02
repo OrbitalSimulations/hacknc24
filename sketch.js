@@ -48,3 +48,7 @@ function draw() {
 
     attractor.show();
 }
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
