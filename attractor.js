@@ -19,6 +19,6 @@ class Attractor{
         noStroke();
 
         fill("#E3B419");
-        ellipse(this.pos.x, this.pos.y, this.r * 2);
+        ellipse(this.pos.x, this.pos.y, this.r );
     }
 }
