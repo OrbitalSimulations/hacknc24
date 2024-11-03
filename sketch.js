@@ -19,6 +19,13 @@ function setup() {
 function draw() {
 	background(0, 25);
 	
+	let toggleDottedLinesDiv = document.getElementById('toggleDottedLinesDiv');
+    if (current_preset === 'sandbox') {
+        toggleDottedLinesDiv.style.display = 'block';
+    } else {
+        toggleDottedLinesDiv.style.display = 'none';
+    }
+
 	// Toggle visibility of distanceInfo based on current preset
 	let distanceInfo = document.getElementById('distanceInfo');
 	if (current_preset === 'twbody') {
@@ -49,8 +56,19 @@ function draw() {
 		movers[1].attract(movers[2]);
 		movers[2].attract(movers[0]);
 		movers[2].attract(movers[1]);
-	} else if (current_preset === 'solar') {
-		// draw white orbit trails
+	} else if (current_preset === 'sandbox') {
+		background(0);
+		let showDottedLines = document.getElementById('toggleDottedLines').checked;
+
+		if (showDottedLines) {
+			for (let i = 0; i < movers.length; i++) {
+				for (let j = i + 1; j < movers.length; j++) {
+					// Draw a dotted line between each unique pair of movers
+					stroke(255); // Make sure line is visible
+					drawDottedLine(movers[i].pos, movers[j].pos, 5, 3);
+				}
+			}
+		}
 		
 	}
 
