@@ -8,7 +8,8 @@ class Mover {
         this.color = color
 
         this.history = [];
-        this.maxHistory = 10;  // Short history length for a brief trail
+        this.solarhistory = []
+        this.maxHistory = 10;
     }
 
     applyForce(force) {
@@ -36,23 +37,32 @@ class Mover {
         if (this.history.length > this.maxHistory) {
             this.history.shift();
         }
+        this.solarhistory.push(this.pos.copy());
     }
 
-    show() {
-        // Draw each point in the history with reduced opacity for motion blur effect
+    show(solar) {
         for (let i = 0; i < this.history.length; i++) {
             let pos = this.history[i];
             let trailSize = map(i, 0, this.history.length, this.r * 0.1, this.r);
-            let opacity = map(i, 0, this.history.length, 10, 25);  // Lower opacity
+            let opacity = map(i, 0, this.history.length, 10, 25);
 
             fill(this.color[0], this.color[1], this.color[2], opacity);
             noStroke();
             ellipse(pos.x, pos.y, trailSize, trailSize);
         }
 
-        // Draw the main mover with reduced opacity
-        fill(this.color[0], this.color[1], this.color[2], 225);  // Main mover opacity reduced to 75 (out of 255)
+        fill(this.color[0], this.color[1], this.color[2], 225);
         noStroke();
         ellipse(this.pos.x, this.pos.y, this.r, this.r);
+
+        if (solar === 'solar') {
+			stroke(247, 247, 247, 25); // White color with slight transparency
+			noFill();
+			beginShape();
+			for (let v of this.solarhistory) {
+				vertex(v.x, v.y);
+			}
+			endShape();
+		}
     }
 }

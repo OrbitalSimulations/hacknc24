@@ -208,12 +208,15 @@ mark {
   width: 100%;
   text-align: center;
   font-size: 30px;
+  margin-bottom: -30px;
 }
 
 .title2 {
   width: 100%;
   text-align: center;
   font-size: 30px;
+  margin-top: -20px;
+  margin-bottom: -30px;
 }
 
 .text1 {
@@ -353,12 +356,25 @@ mark {
 .presets {
   display: flex;
   flex-direction: column;
-  align-items: center;    /* Center align text and image */
-  border: none;           /* Remove border if needed */
+  align-items: center;
+  border: 1px solid #f7f7f7; /* Adds a light gray border */
+  border-radius: 2px;        /* Optional: round the corners */
+  padding: 10px;             /* Add padding inside the border */
   font-size: 16px;
-  background: none;       /* Remove default button background */
+  background: none;
   cursor: pointer; 
-  color: white
+  color: white;
+  transition: border-color 0.3s;
+  box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.3);       
+  margin: 0px 5px;
+}
+
+.presets:hover {
+  border-color: #5a32a8; /* Changes border color on hover */
+}
+
+.presets img {
+  border-radius: 8px; /* Optional: match the button's border-radius */
 }
 
 .vis {
