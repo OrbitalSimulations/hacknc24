@@ -1,10 +1,11 @@
 class Mover {
-    constructor(x, y, vx, vy, mass) {
+    constructor(x, y, vx, vy, mass, color=[4, 217, 255]) {
         this.pos = createVector(x, y);
         this.vel = createVector(vx, vy);
         this.acc = createVector(0, 0);
         this.mass = mass;
         this.r = sqrt(this.mass) * 2;
+        this.color = color
 
         this.history = [];
         this.maxHistory = 10;  // Short history length for a brief trail
@@ -44,13 +45,13 @@ class Mover {
             let trailSize = map(i, 0, this.history.length, this.r * 0.1, this.r);
             let opacity = map(i, 0, this.history.length, 10, 25);  // Lower opacity
 
-            fill(4, 217, 255, opacity);
+            fill(this.color[0], this.color[1], this.color[2], opacity);
             noStroke();
             ellipse(pos.x, pos.y, trailSize, trailSize);
         }
 
         // Draw the main mover with reduced opacity
-        fill(4, 217, 255, 225);  // Main mover opacity reduced to 75 (out of 255)
+        fill(this.color[0], this.color[1], this.color[2], 225);  // Main mover opacity reduced to 75 (out of 255)
         noStroke();
         ellipse(this.pos.x, this.pos.y, this.r, this.r);
     }

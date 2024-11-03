@@ -68,19 +68,19 @@ function windowResized() {
 // Initialize movers with specific positions and velocities
 function initializeMovers() {
   const initialConditions = [
-    { x: width / 2 + 38.7 / 3, y: height / 2, vy: 0.84 },
-    { x: width / 2 + 72.3 / 3, y: height / 2, vy: 0.6 },
-    { x: width / 2 + 100 / 3, y: height / 2, vy: 0.5774 },
-    { x: width / 2 + 152.4 / 3, y: height / 2, vy: 0.7159 },
-    { x: width / 2 + 520.3 / 3, y: height / 2, vy: 1.3 },
-    { x: width / 2 + 953.9 / 3, y: height / 2, vy: 1.76 },
-    { x: width / 2 + 1918 / 3, y: height / 2, vy: 2.52 },
-    { x: width / 2 + 3006 / 3, y: height / 2, vy: 3.14 },
+    { x: width / 2 + 38.7 / 3, y: height / 2, vy: 0.84, color: [64, 63, 60] },
+      { x: width / 2 + 72.3 / 3, y: height / 2, vy: 0.6, color: [145, 116, 26] },
+      { x: width / 2 + 100 / 3, y: height / 2, vy: 0.5774, color: [20, 47, 199]  },
+      { x: width / 2 + 152.4 / 3, y: height / 2, vy: 0.7159, color: [199, 20, 20]  },
+      { x: width / 2 + 520.3 / 3, y: height / 2, vy: 1.3, color: [235, 139, 30]  },
+      { x: width / 2 + 953.9 / 3, y: height / 2, vy: 1.76, color: [214, 192, 69]  },
+      { x: width / 2 + 1918 / 3, y: height / 2, vy: 2.52, color: [46, 168, 217]  },
+      { x: width / 2 + 3006 / 3, y: height / 2, vy: 3.14, color: [39, 85, 214]  },
   ];
 
   for (let condition of initialConditions) {
     let mass1 = parseFloat(document.getElementById('mass1').value); // Get mass from mass1 slider
-    movers.push(new Mover(condition.x, condition.y, 0, condition.vy, mass1));
+    movers.push(new Mover(condition.x, condition.y, 0, condition.vy, mass1, condition.color));
   }
 }
 
@@ -130,14 +130,14 @@ function setupMoverButtons() {
 function setupPresetButtons() {
   const presets = {
     solar: [
-      { x: width / 2 + 38.7 / 3, y: height / 2, vy: 0.84 },
-      { x: width / 2 + 72.3 / 3, y: height / 2, vy: 0.6 },
-      { x: width / 2 + 100 / 3, y: height / 2, vy: 0.5774 },
-      { x: width / 2 + 152.4 / 3, y: height / 2, vy: 0.7159 },
-      { x: width / 2 + 520.3 / 3, y: height / 2, vy: 1.3 },
-      { x: width / 2 + 953.9 / 3, y: height / 2, vy: 1.76 },
-      { x: width / 2 + 1918 / 3, y: height / 2, vy: 2.52 },
-      { x: width / 2 + 3006 / 3, y: height / 2, vy: 3.14 },
+      { x: width / 2 + 38.7 / 3, y: height / 2, vy: 0.84, color: [64, 63, 60] },
+      { x: width / 2 + 72.3 / 3, y: height / 2, vy: 0.6, color: [145, 116, 26] },
+      { x: width / 2 + 100 / 3, y: height / 2, vy: 0.5774, color: [20, 47, 199]  },
+      { x: width / 2 + 152.4 / 3, y: height / 2, vy: 0.7159, color: [199, 20, 20]  },
+      { x: width / 2 + 520.3 / 3, y: height / 2, vy: 1.3, color: [235, 139, 30]  },
+      { x: width / 2 + 953.9 / 3, y: height / 2, vy: 1.76, color: [214, 192, 69]  },
+      { x: width / 2 + 1918 / 3, y: height / 2, vy: 2.52, color: [46, 168, 217]  },
+      { x: width / 2 + 3006 / 3, y: height / 2, vy: 3.14, color: [39, 85, 214]  },
     ],
     twbody: [
       { x: width / 2 + 100, y: height / 2, vy: -2 },
@@ -163,7 +163,7 @@ function setupPresetButtons() {
       // Initialize movers based on the preset
       presetMovers.forEach((condition) => {
         let mass1 = parseFloat(document.getElementById('mass1').value); // Get mass from mass1 slider
-        movers.push(new Mover(condition.x, condition.y, 0, condition.vy, mass1));
+        movers.push(new Mover(condition.x, condition.y, 0, condition.vy, mass1, condition.color));
       });
       // Set the current preset to control attractor visibility
       current_preset = presetName;
