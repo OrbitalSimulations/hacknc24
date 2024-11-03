@@ -20,12 +20,12 @@ Our team wanted to contribute our visualizations to the body of n-body research 
 - Dynamic simulation parameters (Mass size and object quantity)
 
 ## How we built it
-Our website is based on HTML5 and CSS3. We used Matter.js to create the 2-d physics simulations in Javascript. AI was used to make this project in the following ways: 
-- Debugging physics simulations based on Matter.js
-- General research on how to implement Matter.js into our project
+Our website is based on HTML5 and CSS3. We used p5.js to create the 2-d physics simulations in Javascript. AI was used to make this project in the following ways: 
+- Debugging physics simulations based on p5.js
+- General research on how to implement p5.js into our project
 
 ## Challenges we ran into
-- Learning Matter.js and implementing it into a website
+- Learning p5.js and implementing it into a website
 - Accurate math equations that constrain our simulation to a physically-consistent model
 
 ## Accomplishments that we're proud of
@@ -33,7 +33,7 @@ Our website is based on HTML5 and CSS3. We used Matter.js to create the 2-d phys
 - Creating and implementing a website through Github Pages
 
 ## What we learned
-- Physics modeling using Matter.js
+- Physics modeling using p5.js
 - Website design
 - Mathematics that describes kinematic motion
 
