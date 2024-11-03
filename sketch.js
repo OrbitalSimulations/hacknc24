@@ -20,6 +20,8 @@ function setup() {
 
   // Add event listeners for preset buttons
   setupPresetButtons();
+  current_preset = 'solar';
+
 }
 
 function draw() {
@@ -31,9 +33,10 @@ function draw() {
     attractor.attract(mover);
     mover.show();
   }
-
-  // Show the attractor
-  attractor.show();
+  
+  if (current_preset === 'solar' || current_preset === 'sandbox') {
+	attractor.show();
+  }
 }
 
 function windowResized() {
@@ -43,7 +46,7 @@ function windowResized() {
 // Initialize movers with specific positions and velocities
 function initializeMovers() {
   const initialConditions = [
-    { x: width / 2 + 38.7 / 3, y: height / 2, vy: 0.85 },
+    { x: width / 2 + 38.7 / 3, y: height / 2, vy: 0.84 },
     { x: width / 2 + 72.3 / 3, y: height / 2, vy: 0.6 },
     { x: width / 2 + 100 / 3, y: height / 2, vy: 0.5774 },
     { x: width / 2 + 152.4 / 3, y: height / 2, vy: 0.7159 },
@@ -54,7 +57,8 @@ function initializeMovers() {
   ];
 
   for (let condition of initialConditions) {
-    movers.push(new Mover(condition.x, condition.y, 0, condition.vy, 10));
+    let mass1 = parseFloat(document.getElementById('mass1').value); // Get mass from mass1 slider
+    movers.push(new Mover(condition.x, condition.y, 0, condition.vy, mass1));
   }
 }
 
@@ -65,9 +69,10 @@ function setupMassSliders() {
 
   mass1Slider.addEventListener('input', function() {
     document.getElementById('mass1Value').innerText = this.value; // Update displayed mass1 value
+    let mass1 = parseFloat(this.value);
     // Update movers' mass dynamically
     for (let mover of movers) {
-      mover.mass = parseFloat(this.value); // Update mass for each mover
+      mover.mass = mass1; // Update mass for each mover
     }
   });
 
@@ -103,7 +108,7 @@ function setupMoverButtons() {
 function setupPresetButtons() {
   const presets = {
     solar: [
-      { x: width / 2 + 38.7 / 3, y: height / 2, vy: 0.85 },
+      { x: width / 2 + 38.7 / 3, y: height / 2, vy: 0.84 },
       { x: width / 2 + 72.3 / 3, y: height / 2, vy: 0.6 },
       { x: width / 2 + 100 / 3, y: height / 2, vy: 0.5774 },
       { x: width / 2 + 152.4 / 3, y: height / 2, vy: 0.7159 },
@@ -113,8 +118,8 @@ function setupPresetButtons() {
       { x: width / 2 + 3006 / 3, y: height / 2, vy: 3.14 },
     ],
     twbody: [
-        { x: width / 2 + 100, y: height / 2, vy: -0.95 },
-        { x: width / 2 - 100, y: height / 2, vy: 0.95 },
+      { x: width / 2 + 100, y: height / 2, vy: -0.95 },
+      { x: width / 2 - 100, y: height / 2, vy: 0.95 },
     ],
     thbody: [
       { x: width / 2 + 50, y: height / 2, vy: 0.5 },
@@ -124,20 +129,22 @@ function setupPresetButtons() {
     sandbox: Array.from({ length: 20 }, () => ({
       x: random(width),
       y: random(height),
-      vy: random(-2, 2)
-    }))
+      vy: random(-2, 2),
+    })),
   };
 
   // Set up event listeners for each preset button
   for (const [presetName, presetMovers] of Object.entries(presets)) {
-    document.getElementById(presetName).addEventListener('click', function() {
+    document.getElementById(presetName).addEventListener('click', function () {
       // Clear current movers
       movers = [];
       // Initialize movers based on the preset
-      presetMovers.forEach(condition => {
+      presetMovers.forEach((condition) => {
         let mass1 = parseFloat(document.getElementById('mass1').value); // Get mass from mass1 slider
         movers.push(new Mover(condition.x, condition.y, 0, condition.vy, mass1));
       });
+      // Set the current preset to control attractor visibility
+      current_preset = presetName;
     });
   }
 }

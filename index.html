@@ -14,6 +14,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.dom.js"></script> 
     <script src="scripts.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+      </script>
+      <script type="text/javascript"
+        src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      </script>
     <link href="style.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="images/orbitals.png" type="image/x-icon">
 </head>
@@ -40,21 +46,21 @@
     <br>
     <div class="col-6 container">
         <div class="title1">
-            <h2>Orbital Simulation and the N-Body Problem</h2>
+            <h2>Orbital Simulations and the N-Body Problem</h2>
         </div>
         <hr>
         <div class="content1">
             <div class="text1">
                 <p>
-                    Context: An "n-body problem" describes the motion of any n-bodies while under each others' gravitational field. 
-                    The general form equation would describe the kinematic motion of any n bodies, accuratly modelling the mechanics of any and all celesital bodies.
+                    An "n-body problem" describes the motion of any n-bodies while under each others' gravitational field. 
+                    The general form equation would describe the kinematic motion of any $n$ bodies, accurately modeling the mechanics of any and all celestial bodies.
                     Although the exact solution has yet to be found, physics students at UNC were recently focusing on this problem in [xxx class name]. 
                     However, many struggled to visualize how the relationship between these bodies would behave, which limited their abilty 
                     to [do something]. 
 
                 </p>
                 <p>
-                    Solution: Created 2-D simulations designed to help visualize the n-body problem. 
+                    We created 2-D simulations designed to help visualize the n-body problem. 
                 </p>
             </div>
         </div>
@@ -81,7 +87,7 @@
     <div class="col-6 container">
         <div class="slider">
             <label for="mass1">Mass of objects:<span id="mass1Value">10</span>units</label>
-            <input type="range" min="0" max="20" value="10" id="mass1">
+            <input type="range" min="0" max="100" value="10" id="mass1">
             <button id="add">Add Object</button>
         </div>
         
