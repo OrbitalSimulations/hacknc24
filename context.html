@@ -12,6 +12,12 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="scripts.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+    src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
     <link href="style.css" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="images/orbitals.ico" type="image/x-icon">
 </head>
@@ -38,36 +44,57 @@
     <br>
     <div class="col-6 container">
         <div class="title1">
-        <h2>Context: The N-body Problem</h2>
+            <h2>The N-body Problem</h2>
         </div>
         <hr>
         <div class="content1">
-        <div class="text1">
-            <p>
-                <strong><u>Background:</u> </strong> The n-body problem describes the motion of any "n" objects when under each others gravitational field. 
-                As described by Brittanica: "In the general n-body problem, all bodies have arbitrary masses, initial velocities, and positions; the bodies
-                interact through Newton’s law of gravitation, and one attempts to determine the subsequent motion of all the bodies." 
-                This theoretical equation is closely linked with the motion of celestial bodies, leading to centuries of research and testing to find a general solution. 
-                Although many approximations have been found (such as restricted 3-body problems of Jupiter’s effect on asteroids), an exact general equation has yet to be 
-                discovered. 
+            <div class="text1">
+                <p>
+                    <strong><u>Background:</u> </strong> The n-body problem describes the motion of any "n" objects when under each others gravitational field. 
+                    As described by Brittanica: "In the general n-body problem, all bodies have arbitrary masses, initial velocities, and positions; the bodies
+                    interact through Newton's law of gravitation, and one attempts to determine the subsequent motion of all the bodies." 
+                    This theoretical equation is closely linked with the motion of celestial bodies, leading to centuries of research and testing to find a general solution. 
+                    Although many approximations have been found (such as restricted 3-body problems of Jupiter's effect on asteroids), an exact general equation has yet to be 
+                    discovered. 
+                    
+                </p>
                 
-            </p>
+                <p>
+                    <em>(Source: <a href="https://www.britannica.com/science/celestial-mechanics-physics/The-n-body-problem" style="color: #5555FF;">Brittanica: The n-body problem)</a></em>
+                </p>
             
-            <p>
-                <em>(Source: <a href="https://www.britannica.com/science/celestial-mechanics-physics/The-n-body-problem" style="color: #5555FF;">Brittanica: The n-body problem)</a></em>
-            </p>
-        
-        </div>
-        <img class="image3" src="images/n-body.webp" alt="Picture of the circular">
+            </div>
+            <img class="image3" src="images/n-body.webp" alt="Picture of the circular">
         </div>
 
-        <hr>
         <div class="text1">
             <p>
                 <strong><u>Inspiration:</u> </strong> [Caleb please write inspiration here]
             </p>
         </div>
         
+    </div>
+
+    <br>
+    <div class="col-6 container">
+        <div class="title1">
+            <h2>Math and Equations</h2>
+        </div>
+        <hr>
+
+        <div class="content1">
+            <div class="text1">
+                <p>
+                    Newton's Law of Gravitation is the fundamental equation that describes the force of attraction between two objects. It is defined as
+                    $$F = G \frac{m_1 m_2}{r^2}$$
+                    where F is the force of attraction, G is the gravitational constant, m1 and m2 are the masses of the two objects, and r is the distance between the two objects.
+                    This equation is the basis for the n-body problem, as it describes the force of attraction between any two objects in the system.
+                </p>
+                <p>
+                    However, the n-body problem contains multiple objects, so this problem is unsolvable due to the nature of how unstable this system would be.
+                    The n-body problem is unsolvable because there is no general solution to explain the motion of the $n$ bodies.
+                </p>
+            </div>
     </div>
 </body>
 </html>
