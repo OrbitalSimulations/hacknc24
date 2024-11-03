@@ -1,12 +1,11 @@
-# hacknc2024
+# HackNC 2024
 
-home
-- short explanation of project
-- demo
+Caleb Han, Mason Mines, Kai Zhou
 
-streamlit api
+[Devpost](https://devpost.com/software/orbital-simulation-and-the-n-body-problem)
 
-solar system
-sandbox
-2-body orbiting (if lucky)
-3-body
+## Project Description
+
+## Demonstration
+
+## Sources
