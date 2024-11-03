@@ -34,6 +34,21 @@ function setup() {
       attractor.r = sqrt(attractor.mass) * 10; // Update radius based on new mass
       document.getElementById('mass2Value').innerText = this.value; // Update displayed mass2 value
   });
+
+    // Add event listeners for the buttons to add and remove objects
+    const addMoverButton = document.getElementById('add');
+    const removeMoverButton = document.getElementById('remove');
+
+    addMoverButton.addEventListener('click', function() {
+        let x = random(width);
+        let y = random(height);
+        let mass1 = document.getElementById('mass1').value; // Get mass from mass1 slider
+        movers.push(new Mover(x, y, mass1));
+    });
+
+    removeMoverButton.addEventListener('click', function() {
+        movers.pop();
+    });
 }
 
 

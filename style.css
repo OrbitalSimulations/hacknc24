@@ -358,13 +358,29 @@ mark {
 }
 
 .slider {
-    display: flex; /* Use flexbox for each slider */
-    flex-direction: row; /* Stack label and input vertically */
-    margin: 0px 10px; /* Space between sliders */
-    width: 100%; /* Make the slider take full width */
+    display: flex;
+    align-items: center; /* Center vertically within the container */
+    width: 100%;
+    margin: 10px 0;
 }
 
-.slider1 {
-    display: flex; /* Use flexbox for each slider */
-    width: 40%; /* Make the slider take full width */
+.slider label {
+    width: 38%; /* Set label width */
+    text-align: left; /* Align label text to the left */
+}
+
+.slider input[type="range"] {
+    width: 33%; /* Set slider width */
+}
+
+.slider button {
+    width: 25%; /* Set button width */
+    padding: 8px 0;
+    margin-left: 100px;
+    font-size: 16px;
+    text-align: center;
+}
+
+#mass1Value, #mass2Value {
+    padding: 0 5px; /* Space around dynamic values */
 }
