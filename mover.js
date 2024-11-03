@@ -16,15 +16,15 @@ class Mover {
         this.acc.add(f);
     }
 
-    // attract(mover) {
-    //     let force = p5.Vector.sub(this.pos, mover.pos);
-    //     let distanceSq = constrain(force.magSq(), 100, 1000);
-    //     let G = 5;
-    //     let strength = G * (this.mass * mover.mass) / distanceSq;
+    attract(mover) {
+        let force = p5.Vector.sub(this.pos, mover.pos);
+        let distanceSq = constrain(force.magSq(), 100, 1000);
+        let G = 9.8;
+        let strength = G * (this.mass * mover.mass) / distanceSq;
 
-    //     force.setMag(strength * 0.1);
-    //     mover.applyForce(force);
-    // }
+        force.setMag(strength);
+        mover.applyForce(force);
+    }
 
     update() {
         this.vel.add(this.acc);

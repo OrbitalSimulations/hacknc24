@@ -2,11 +2,22 @@ let movers = [];
 let attractor;
 
 function setup() {
+  current_preset = 'solar';
   createCanvas(windowWidth, windowHeight);
   background(0);
 
   // Initialize the movers with specific initial conditions
   initializeMovers();
+//   if (current_preset === 'solar' || current_preset === 'sandbox') {
+	
+//   } else if (current_preset === 'twbody') {
+// 	movers[0] = new Mover((width - 100)/2, height/2, 0, 5, 10);
+// 	movers[1] = new Mover((width + 100)/2, height/2, 0, -5, 10);
+//   } else {
+// 	movers[0] = new Mover((width - 100)/2, height/2, 0, 5, 10);
+// 	movers[1] = new Mover((width + 100)/2, height/2, 0, -5, 10);
+// 	movers[2] = new Mover(width/2, height/2, 0, -0.02, 10);
+//   }
 
   // Initialize attractor with a default mass
   let mass2 = parseFloat(document.getElementById('mass2').value); // Get mass from mass2 slider
@@ -20,19 +31,30 @@ function setup() {
 
   // Add event listeners for preset buttons
   setupPresetButtons();
-  current_preset = 'solar';
-
 }
 
 function draw() {
   background(0, 25); // Create a trail effect
 
   // Update and show all movers
-  for (let mover of movers) {
-    mover.update();
-    attractor.attract(mover);
-    mover.show();
+  if (current_preset === 'twbody') {
+	movers[0].attract(movers[1])
+	movers[1].attract(movers[0])
+	} else if (current_preset === 'thbody') {
+	movers[0].attract(movers[1])
+	movers[0].attract(movers[2])
+	movers[1].attract(movers[0])
+	movers[1].attract(movers[2])
+	movers[2].attract(movers[0])
+	movers[2].attract(movers[1])
   }
+	for (let mover of movers) {
+		mover.update();
+		if (current_preset === 'solar' || current_preset === 'sandbox') {
+			attractor.attract(mover);
+		}
+		mover.show();
+	}
   
   if (current_preset === 'solar' || current_preset === 'sandbox') {
 	attractor.show();
@@ -118,13 +140,13 @@ function setupPresetButtons() {
       { x: width / 2 + 3006 / 3, y: height / 2, vy: 3.14 },
     ],
     twbody: [
-      { x: width / 2 + 100, y: height / 2, vy: -0.95 },
-      { x: width / 2 - 100, y: height / 2, vy: 0.95 },
+      { x: width / 2 + 100, y: height / 2, vy: -2 },
+      { x: width / 2 - 100, y: height / 2, vy: 2 },
     ],
     thbody: [
-      { x: width / 2 + 50, y: height / 2, vy: 0.5 },
-      { x: width / 2 + 100, y: height / 2, vy: -0.6 },
-      { x: width / 2 - 100, y: height / 2, vy: 0.75 },
+      { x: width / 2, y: height / 2, vy: -0.1 },
+      { x: width / 2 + 100, y: height / 2, vy: -2.5 },
+      { x: width / 2 - 100, y: height / 2, vy: 2.5 },
     ],
     sandbox: Array.from({ length: 20 }, () => ({
       x: random(width),
